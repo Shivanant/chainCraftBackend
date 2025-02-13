@@ -3,6 +3,7 @@ import cors from "cors"
 import helmet, { crossOriginResourcePolicy } from "helmet"
 import ENV from "./config/config.js";
 import analyseRoute from "./routes/analyse.routes.js"
+import errorHandler from "./middleware/error.handler.js";
 
 const app = express();
 app.use(helmet())
@@ -16,7 +17,7 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/v1/analyse', analyseRoute)
-
+app.use(errorHandler);
 
 app.listen(ENV.port,()=>{
     console.log(`Server runing at port : ${ENV.port}`)
